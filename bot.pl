@@ -4,9 +4,9 @@ use warnings;
 use Facebook::Messenger::Bot;
 
 my $bot = Facebook::Messenger::Bot->new({
-	access_token	=> '...',
-	app_secret		=> '...',
-	verify_token	=> '...'
+	access_token   => '...',
+	app_secret     => '...',
+	verify_token   => '...'
 });
 
 $bot->register_callback_for('message', sub {
