@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use Plack::Request;
+use Plack::Response;
 
 sub new {
     my $self = shift;
@@ -28,7 +29,8 @@ sub spin { #basically a server
     sub {
         my $env = shift;
 
-        my $req = Plack::Request->new($env);
+        my $req = Plack::Request  ->new($env);
+        my $res = Plack::Response ->new();
 
         # ...
         return [ '200',
