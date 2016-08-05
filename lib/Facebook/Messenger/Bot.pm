@@ -3,6 +3,8 @@ package Facebook::Messenger::Bot;
 use strict;
 use warnings;
 
+use Plack::Request;
+
 sub new {
     my $self = shift;
     my $params = shift;
@@ -20,15 +22,18 @@ sub register_callback_for {
     return 1;
 }
 
-sub spin {
+sub spin { #basically a server
     my $self = shift;
 
     sub {
         my $env = shift;
+
+        my $req = Plack::Request->new($env);
+
         # ...
         return [ '200',
                 [ 'Content-Type' => 'text/plain' ],
-                [ "Hello World" ]
+                [ "Hello World!!\n" ]
         ];
     }
 }
