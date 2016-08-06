@@ -1,7 +1,7 @@
 # Perl bindings for the Facebook Messenger API
 
-This is currently a work in progress to implement the Facebook Messenger
-API for friendly Perl usage :)
+This is currently a work in progress to implement the [Facebook Messenger
+API](https://developers.facebook.com/docs/messenger-platform) for friendly Perl usage :)
 
 You can take a look into the `bot.pl` script, but basically the interface
 should be super simple and clean with something like this:
@@ -50,6 +50,6 @@ This is mildly and loosely based on [this](https://github.com/hyperoslo/facebook
 ### Author
 [David Moreno](https://damog.net).
 
-# This is massively incomplete anyway.
+# This is massively incomplete anyway
 
 Thanks for looking :)
