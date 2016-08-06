@@ -50,8 +50,8 @@ The actual spinning, you can hook up to whatever framework or application that s
 
 `> plackup -S Starman bot.pl`
 
-...and so that you can direct the Facebook webhook you provide to
-Facebook to this, using whatever method. So much Plack goodness.
+...to make your webhook accessible to Facebook with whatever method
+you feel most comfortable with :)
 
 This work is mildly and loosely based on [this](https://github.com/hyperoslo/facebook-messenger).
 
