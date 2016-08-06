@@ -3,11 +3,13 @@ package Facebook::Messenger::Bot;
 use strict;
 use warnings;
 
+use JSON;
 use Data::Dumper;
 use Plack::Request;
 use Plack::Response;
 
 use Facebook::Messenger::Bot::Hook;
+use Facebook::Messenger::Request;
 
 sub new {
     my $self = shift;
@@ -44,6 +46,22 @@ sub spin { #basically a server
 
         $s->process();
     }
+}
+
+sub deliver {
+    my $self = shift;
+    my $args = shift;
+
+    my $req = Facebook::Messenger::Request->new;
+    $req->content( encode_json( $args )); # XXX: proper sanitization :)
+    $req->access_token( $self->{_config}->{access_token} );
+
+    my $foo = $req->execute();
+
+    die Dumper $req;
+
+
+
 }
 
 1;

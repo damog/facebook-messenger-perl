@@ -22,4 +22,22 @@ sub type {
     return $self->{type};
 }
 
+sub call {
+    my $self = shift;
+    if ( my $call = shift ) {
+        $self->{call} = $call;
+    }
+    return $self->{call};
+}
+
+sub execute {
+    my $self = shift;
+    my $bot = shift;
+    my $incoming = shift;
+
+    # XXX: what if there's no call??
+    my $res = $self->call()->( $bot, $incoming );
+
+}
+
 1;

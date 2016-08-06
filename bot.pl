@@ -3,6 +3,8 @@
 use strict;
 use warnings;
 
+use Data::Dumper;
+
 use Facebook::Messenger::Bot;
 
 my $bot = Facebook::Messenger::Bot->new({
@@ -17,7 +19,7 @@ $bot->register_hook_for('message', sub {
 
 	my $res = $bot->deliver({
 		recipient => $message->sender,
-		message => 'what up!'
+		message => { text => "It is currently: " . time() }
 	});
 	...
 });

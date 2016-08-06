@@ -67,8 +67,12 @@ sub trigger_events {
             my $incoming = Facebook::Messenger::Incoming->receive( $msg );
 
             for my $hook ( @{ $self->{_bot}->{_hooks} } ) {
+                # might make more sense to use a dispatch table
                 next unless $hook->type eq $incoming->type;
-                die 'profit?';
+                # XXX: how to protect the execution?
+                my $execute = $hook->execute( $self->{_bot}, $incoming );
+                # XXX: what to do with $execute?
+
             }
         }
     }
