@@ -1,3 +1,5 @@
+# ~/git_tree/facebook-messenger-perl (master) > plackup -MData::Dumper -Ilib -L Shotgun -S Starman bot.pl
+
 use strict;
 use warnings;
 
