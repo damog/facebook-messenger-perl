@@ -41,7 +41,6 @@ sub receive {
     my $self = shift;
 
     my $body = $self->{_req}->content;
-    die Dumper $body;
 
 }
 
