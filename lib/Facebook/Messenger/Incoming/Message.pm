@@ -3,6 +3,8 @@ package Facebook::Messenger::Incoming::Message;
 use strict;
 use warnings;
 
+use Data::Dumper;
+
 sub new {
     my $self = shift;
     my $payload = shift;
@@ -30,5 +32,7 @@ sub text {
     my $self = shift;
     return $self->message->{text};
 }
+
+sub type { 'message' }
 
 1;

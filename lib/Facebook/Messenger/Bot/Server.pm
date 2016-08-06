@@ -63,10 +63,16 @@ sub trigger_events {
 
     for my $entry ( @{ $events->{entry} } ) { # yay n^2!
         for my $msg ( @{ $entry->{messaging} } ) {
-            push @{ $self->{_bot}->{_messages} },
-                Facebook::Messenger::Incoming->receive( $msg );
+            # do we want/need to log the messages received?
+            my $incoming = Facebook::Messenger::Incoming->receive( $msg );
+
+            for my $hook ( @{ $self->{_bot}->{_hooks} } ) {
+                next unless $hook->type eq $incoming->type;
+                die 'profit?';
+            }
         }
     }
+
 }
 
 sub check_integrity {

@@ -11,7 +11,7 @@ my $bot = Facebook::Messenger::Bot->new({
 	verify_token   => '...'
 });
 
-$bot->register_callback_for('message', sub {
+$bot->register_hook_for('message', sub {
 	my $bot = shift;
 	my $message = shift;
 

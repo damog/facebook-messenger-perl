@@ -7,6 +7,8 @@ use Data::Dumper;
 use Plack::Request;
 use Plack::Response;
 
+use Facebook::Messenger::Bot::Hook;
+
 sub new {
     my $self = shift;
     my $params = shift;
@@ -14,14 +16,18 @@ sub new {
     return bless { _config => $params }, $self;
 }
 
-sub register_callback_for {
+sub register_hook_for {
     my $self = shift;
-    my $type = shift;
-    my $call = shift;
+
+    my $hook = Facebook::Messenger::Bot::Hook->new(
+        { type => $_[0], call => $_[1] }
+    );
 
     # XXX: Validate inputs ;)
 
-    return 1;
+    push @{ $self->{_hooks} }, $hook;
+
+    return $hook;
 }
 
 sub spin { #basically a server
