@@ -8,7 +8,7 @@ use Data::Dumper;
 use Plack::Request;
 use Plack::Response;
 
-use Facebook::Messenger::Message;
+use Facebook::Messenger::Incoming;
 
 sub new {
     my $self = shift;
@@ -36,6 +36,7 @@ sub process {
         $res->status( 405 );
     }
 
+    $res->status(200); # unless otherwise noted?
     $res->finalize;
 
 }
@@ -63,7 +64,7 @@ sub trigger_events {
     for my $entry ( @{ $events->{entry} } ) { # yay n^2!
         for my $msg ( @{ $entry->{messaging} } ) {
             push @{ $self->{_bot}->{_messages} },
-                Facebook::Messenger::Message->receive( $msg );
+                Facebook::Messenger::Incoming->receive( $msg );
         }
     }
 }

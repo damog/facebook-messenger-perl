@@ -1,9 +1,11 @@
-package Facebook::Messenger::Message;
+package Facebook::Messenger::Incoming;
 
 use strict;
 use warnings;
 
 use Data::Dumper;
+
+use Facebook::Messenger::Incoming::Message;
 
 my $event_types = {
     'message'           => 'Message',
@@ -16,9 +18,12 @@ my $event_types = {
 
 sub receive {
     my $self = shift;
-    my $message = shift;
+    my $payload = shift;
 
-    die Dumper $message;
+    for my $event ( keys %$event_types ) {
+        next unless $payload->{ $event };
+        return "Facebook::Messenger::Incoming::$event_types->{$event}"->new($payload);
+    }
 }
 
 1;
