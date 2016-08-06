@@ -31,7 +31,12 @@ sub spin { #basically a server
         my $env = shift;
 
         require Facebook::Messenger::Bot::Server;
-        my $s = Facebook::Messenger::Bot::Server->new( $self, $env );
+        my $s = Facebook::Messenger::Bot::Server->new({
+            bot => $self,
+            env => $env
+        });
+
+        $s->process();
     }
 }
 
