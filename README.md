@@ -5,7 +5,9 @@ API](https://developers.facebook.com/docs/messenger-platform) for friendly Perl 
 
 So far this is a quick example of what you can build:
 
-![](https://github.com/damog/facebook-messenger-perl/blob/master/media/sample-01.gif?raw=true)
+<p align="center">
+    <img src="https://github.com/damog/facebook-messenger-perl/blob/master/media/sample-01.gif?raw=true">
+</p>
 
 The source code for that example is on the `reply-bot.pl` example [here](https://github.com/damog/facebook-messenger-perl/blob/master/examples/reply-bot.pl).
 
