@@ -9,13 +9,14 @@ use Facebook::Messenger::Incoming::Message;
 use Facebook::Messenger::Incoming::Delivery;
 use Facebook::Messenger::Incoming::Postback;
 use Facebook::Messenger::Incoming::Optin;
+use Facebook::Messenger::Incoming::Read;
 
 my $event_types = {
     'message'           => 'Message',
     'delivery'          => 'Delivery',
     'postback'          => 'Postback',
     'optin'             => 'Optin',
-    # 'read'              => 'Read',
+    'read'              => 'Read',
     # 'account_linking'   => 'AccountLinking'
 };
 
