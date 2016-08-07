@@ -8,12 +8,13 @@ use Data::Dumper;
 use Facebook::Messenger::Incoming::Message;
 use Facebook::Messenger::Incoming::Delivery;
 use Facebook::Messenger::Incoming::Postback;
+use Facebook::Messenger::Incoming::Optin;
 
 my $event_types = {
     'message'           => 'Message',
     'delivery'          => 'Delivery',
     'postback'          => 'Postback',
-    # 'optin'             => 'Optin',
+    'optin'             => 'Optin',
     # 'read'              => 'Read',
     # 'account_linking'   => 'AccountLinking'
 };
