@@ -8,7 +8,7 @@ my $bot = Facebook::Messenger::Bot->new;
 $bot->read_config('config.ini');
 
 my $res = $bot->deliver({
-    recipient => { id => '1098398620209012' },
+    recipient => { id => '1202397443144853' },
     message => {
         attachment => {
             type => 'template',

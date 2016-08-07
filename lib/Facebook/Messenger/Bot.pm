@@ -59,7 +59,6 @@ sub deliver {
     $req->access_token( $self->{_config}->{access_token} );
 
     my $foo = $req->execute();
-
     # die Dumper $req;
 }
 
