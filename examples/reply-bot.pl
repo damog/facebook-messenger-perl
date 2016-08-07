@@ -15,7 +15,6 @@ $bot->register_hook_for('message', sub {
 	my $message = shift;
 
     if ( $message->text =~ /hello/i ) {
-        print STDERR "I'm here\n";
         $bot->deliver({
             recipient => { id => $message->sender_id },
             message => { text => "Hey dude, what's up?" }
