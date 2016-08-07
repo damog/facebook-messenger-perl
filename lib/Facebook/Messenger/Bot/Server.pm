@@ -8,6 +8,7 @@ use Data::Dumper;
 use Plack::Request;
 use Plack::Response;
 
+use Facebook::Messenger::Utils;
 use Facebook::Messenger::Incoming;
 
 sub new {
@@ -15,12 +16,11 @@ sub new {
     my $args = shift;
 
     return bless {
-        _bot => $args->{bot},
+        _bot => delete $args->{bot},
         _res => Plack::Response->new,
-        _req => Plack::Request->new( $args->{env} ),
-        verbose => $args->{verbose} || 0
+        _req => Plack::Request->new( delete $args->{env} ),
+        %$args
     }, $self;
-
 }
 
 sub process {
@@ -40,13 +40,17 @@ sub process {
     }
 
     $res->status(200); # unless otherwise noted?
+    my $final_res = $res->finalize;
 
     # print STDERR Dumper [$self];
     if ( $self->{verbose} ) {
-        print STDERR Dumper { req => $req, res => $res };
+        dump("req:");
+        dump_http( $req );
+        dump("res:");
+        dump_http( $res );
     }
 
-    $res->finalize;
+    return $final_res;
 
 }
 

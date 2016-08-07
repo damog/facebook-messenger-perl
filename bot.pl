@@ -21,4 +21,12 @@ $bot->register_hook_for('message', sub {
 	# ...
 });
 
+$bot->register_hook_for('delivery', sub {
+    my $bot = shift;
+    my $message = shift;
+
+    print STDERR 'Got notification of messages ('. join(',', @{ $message->mids }) .') delivered. ',
+        'From: ', $message->sender_id, ', to: ', $message->recipient_id, "\n";
+});
+
 $bot->spin({verbose => 1});

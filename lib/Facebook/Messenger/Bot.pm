@@ -34,7 +34,7 @@ sub register_hook_for {
 
 sub spin { #basically a server
     my $self = shift;
-    my $args = shift;
+    my $args = shift || {};
 
     sub {
         my $env = shift;
@@ -43,7 +43,7 @@ sub spin { #basically a server
         my $s = Facebook::Messenger::Bot::Server->new({
             bot => $self,
             env => $env,
-            ( $args->{verbose} ? ( verbose => 1 ) : ())
+            %$args
         });
 
         $s->process();

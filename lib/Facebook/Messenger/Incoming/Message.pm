@@ -33,6 +33,16 @@ sub text {
     return $self->message->{text};
 }
 
+sub mid {
+    my $self = shift;
+    return $self->{mid};
+}
+
+sub id {
+    my $self = shift;
+    return $self->mid;
+}
+
 sub type { 'message' }
 
 1;
