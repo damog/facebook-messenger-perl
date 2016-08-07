@@ -3,8 +3,13 @@
 This is currently a work in progress to implement the [Facebook Messenger
 API](https://developers.facebook.com/docs/messenger-platform) for friendly Perl usage :)
 
-You can take a look into the `bot.pl` script, but basically the interface
-should be super simple and clean with something like this:
+So far this is a quick example of what you can build:
+
+![](https://github.com/damog/facebook-messenger-perl/blob/master/media/sample-01.gif?raw=true)
+
+The source code for that example is on the `reply-bot.pl` example [here](https://github.com/damog/facebook-messenger-perl/blob/master/examples/reply-bot.pl).
+
+But basically the interface should be super simple and clean with something like this:
 
 ```perl
 # bot.pl
@@ -20,21 +25,10 @@ $bot->register_hook_for('message', sub {
 	my $bot = shift;
 	my $message = shift;
 
-    # ...
-    # process, store or save $message->text()
-
 	my $res = $bot->deliver({
 		recipient => $message->sender,
 		message => { text => "You said: " . $message->text() }
 	});
-
-    # do something with $res if you need?
-    # ...or not:
-    $bot->deliver({
-        recipient => $message->sender,
-        message => { text => 'Encoding... ' . reverse $message->text }
-    });
-});
 
 $bot->register_hook_for('postback', sub {
     my $bot = shift;
