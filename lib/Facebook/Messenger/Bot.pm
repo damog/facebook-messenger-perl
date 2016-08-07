@@ -59,9 +59,22 @@ sub deliver {
     my $foo = $req->execute();
 
     die Dumper $req;
+}
 
+sub read_config {
+    my $self = shift;
+    my $file = shift;
 
+    Carp::croak "I can't read $file!" unless -r $file;
 
+    require Config::Tiny;
+    my $config = Config::Tiny->read( $file );
+
+    for my $key ( keys %{ $config->{_} } ) {
+        $self->{_config}->{$key} = $config->{_}->{$key};
+    }
+    
+    return $self->{_config};
 }
 
 1;
