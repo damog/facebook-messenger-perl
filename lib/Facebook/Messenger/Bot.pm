@@ -34,6 +34,7 @@ sub register_hook_for {
 
 sub spin { #basically a server
     my $self = shift;
+    my $args = shift;
 
     sub {
         my $env = shift;
@@ -41,7 +42,8 @@ sub spin { #basically a server
         require Facebook::Messenger::Bot::Server;
         my $s = Facebook::Messenger::Bot::Server->new({
             bot => $self,
-            env => $env
+            env => $env,
+            ( $args->{verbose} ? ( verbose => 1 ) : ())
         });
 
         $s->process();
@@ -58,7 +60,7 @@ sub deliver {
 
     my $foo = $req->execute();
 
-    die Dumper $req;
+    # die Dumper $req;
 }
 
 sub read_config {
@@ -73,7 +75,7 @@ sub read_config {
     for my $key ( keys %{ $config->{_} } ) {
         $self->{_config}->{$key} = $config->{_}->{$key};
     }
-    
+
     return $self->{_config};
 }
 

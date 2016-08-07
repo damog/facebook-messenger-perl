@@ -33,10 +33,13 @@ sub execute {
     $self->header('Content-Type' => 'application/json');
 
     my $ua = LWP::UserAgent->new( agent => 'facebook-messenger-perl/0.1' );
-
     my $res = $ua->request( $self );
 
-    die Dumper $res;
+    if ( $res->is_success ) {
+        return $res;
+    } else {
+        die Dumper [ $res ];
+    }
 
 }
 

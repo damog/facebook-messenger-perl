@@ -7,11 +7,8 @@ use Data::Dumper;
 
 use Facebook::Messenger::Bot;
 
-my $bot = Facebook::Messenger::Bot->new({
-	access_token   => '...',
-	app_secret     => '...',
-	verify_token   => '...'
-});
+my $bot = Facebook::Messenger::Bot->new();
+$bot->read_config('config.ini');
 
 $bot->register_hook_for('message', sub {
 	my $bot = shift;
@@ -19,9 +16,9 @@ $bot->register_hook_for('message', sub {
 
 	my $res = $bot->deliver({
 		recipient => $message->sender,
-		message => { text => "It is currently: " . time() }
+		message => { text => "Are you sure? " . reverse( $message->text ) }
 	});
-	...
+	# ...
 });
 
-$bot->spin();
+$bot->spin({verbose => 1});

@@ -18,6 +18,7 @@ sub new {
         _bot => $args->{bot},
         _res => Plack::Response->new,
         _req => Plack::Request->new( $args->{env} ),
+        verbose => $args->{verbose} || 0
     }, $self;
 
 }
@@ -29,7 +30,9 @@ sub process {
     my $res = $self->{_res};
 
     if ( $req->method eq 'GET' ) {
-        $self->verify();
+        $res->status();
+        $res->body('nothing to see here really');
+        # $self->verify();
     } elsif ( $req->method eq 'POST' ) {
         $self->receive();
     } else {
@@ -37,6 +40,12 @@ sub process {
     }
 
     $res->status(200); # unless otherwise noted?
+
+    # print STDERR Dumper [$self];
+    if ( $self->{verbose} ) {
+        print STDERR Dumper { req => $req, res => $res };
+    }
+
     $res->finalize;
 
 }
@@ -64,15 +73,18 @@ sub trigger_events {
     for my $entry ( @{ $events->{entry} } ) { # yay n^2!
         for my $msg ( @{ $entry->{messaging} } ) {
             # do we want/need to log the messages received?
-            my $incoming = Facebook::Messenger::Incoming->receive( $msg );
+            if ( my $incoming = Facebook::Messenger::Incoming->receive( $msg ) ) {
 
-            for my $hook ( @{ $self->{_bot}->{_hooks} } ) {
-                # might make more sense to use a dispatch table
-                next unless $hook->type eq $incoming->type;
-                # XXX: how to protect the execution?
-                my $execute = $hook->execute( $self->{_bot}, $incoming );
-                # XXX: what to do with $execute?
+                for my $hook ( @{ $self->{_bot}->{_hooks} } ) {
+                    # might make more sense to use a dispatch table
+                    next unless $hook->type eq $incoming->type;
+                    # XXX: how to protect the execution?
+                    my $execute = $hook->execute( $self->{_bot}, $incoming );
+                    # XXX: what to do with $execute?
 
+                }
+            } else {
+                # we still don't know what to do with this type
             }
         }
     }

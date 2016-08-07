@@ -8,12 +8,12 @@ use Data::Dumper;
 use Facebook::Messenger::Incoming::Message;
 
 my $event_types = {
-    'message'           => 'Message',
-    'delivery'          => 'Delivery',
-    'postback'          => 'Postback',
-    'optin'             => 'Optin',
-    'read'              => 'Read',
-    'account_linking'   => 'AccountLinking'
+    'message'           => 'Message'
+    # 'delivery'          => 'Delivery',
+    # 'postback'          => 'Postback',
+    # 'optin'             => 'Optin',
+    # 'read'              => 'Read',
+    # 'account_linking'   => 'AccountLinking'
 };
 
 sub receive {
