@@ -11,8 +11,8 @@ my $bot = Facebook::Messenger::Bot->new();
 $bot->read_config('config.ini');
 
 $bot->register_hook_for('message', sub {
-	my $bot = shift;
-	my $message = shift;
+    my $bot = shift;
+    my $message = shift;
 
     if ( $message->text =~ /hello/i ) {
         $bot->deliver({
