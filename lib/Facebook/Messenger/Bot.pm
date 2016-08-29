@@ -46,7 +46,7 @@ sub spin { #basically a server
             %$args
         });
 
-        $s->process();
+        return $s->process();
     }
 }
 
@@ -60,6 +60,18 @@ sub deliver {
 
     my $foo = $req->execute();
     # die Dumper $req;
+}
+
+sub expect_verify_token {
+    my $self = shift;
+    my $token = shift;
+
+    $self->{_expect_verify_token} = $token;
+}
+
+sub _is_expecting_token_verification {
+    my $self = shift;
+    $self->{_expect_verify_token} ? $self->{_expect_verify_token} : undef;
 }
 
 sub read_config {
